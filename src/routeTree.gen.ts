@@ -13,7 +13,11 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as LoginImport } from './routes/login'
 import { Route as HomeImport } from './routes/home'
+import { Route as AuthenticatedImport } from './routes/_authenticated'
 import { Route as IndexImport } from './routes/index'
+import { Route as AuthenticatedTeamsImport } from './routes/_authenticated/teams'
+import { Route as AuthenticatedEventsImport } from './routes/_authenticated/events'
+import { Route as AuthenticatedDashboardImport } from './routes/_authenticated/dashboard'
 
 // Create/Update Routes
 
@@ -27,9 +31,29 @@ const HomeRoute = HomeImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const AuthenticatedRoute = AuthenticatedImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const IndexRoute = IndexImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
+} as any)
+
+const AuthenticatedTeamsRoute = AuthenticatedTeamsImport.update({
+  path: '/teams',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+
+const AuthenticatedEventsRoute = AuthenticatedEventsImport.update({
+  path: '/events',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+
+const AuthenticatedDashboardRoute = AuthenticatedDashboardImport.update({
+  path: '/dashboard',
+  getParentRoute: () => AuthenticatedRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -40,6 +64,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/_authenticated': {
+      preLoaderRoute: typeof AuthenticatedImport
+      parentRoute: typeof rootRoute
+    }
     '/home': {
       preLoaderRoute: typeof HomeImport
       parentRoute: typeof rootRoute
@@ -48,6 +76,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginImport
       parentRoute: typeof rootRoute
     }
+    '/_authenticated/dashboard': {
+      preLoaderRoute: typeof AuthenticatedDashboardImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    '/_authenticated/events': {
+      preLoaderRoute: typeof AuthenticatedEventsImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    '/_authenticated/teams': {
+      preLoaderRoute: typeof AuthenticatedTeamsImport
+      parentRoute: typeof AuthenticatedImport
+    }
   }
 }
 
@@ -55,6 +95,11 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren([
   IndexRoute,
+  AuthenticatedRoute.addChildren([
+    AuthenticatedDashboardRoute,
+    AuthenticatedEventsRoute,
+    AuthenticatedTeamsRoute,
+  ]),
   HomeRoute,
   LoginRoute,
 ])
