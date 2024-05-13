@@ -7,6 +7,7 @@ declare module '@tanstack/react-router' {
 	}
 }
 const router = createRouter({ routeTree })
+
 export function App() {
 	return (
 		<>
