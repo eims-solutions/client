@@ -1,3 +1,4 @@
+import { useAuthStore } from '@/stores/useAuthStore'
 import { getApiUrl } from '@/utils/getApiUrl'
 import { request } from '@/utils/request'
 import axios, { ResponseType } from 'axios'
@@ -5,6 +6,7 @@ import axios, { ResponseType } from 'axios'
 export function useApiRequest() {
 	const hostname = window.location.hostname
 	const apiUrl = getApiUrl(hostname)
+	const token = useAuthStore(state => state.token)
 
 	const apiRequest = <Params = unknown, Data = unknown>(
 		baseURL: string,
@@ -18,6 +20,7 @@ export function useApiRequest() {
 		const defaultHeaders = {
 			'Content-Type': 'application/json',
 			Accept: 'application/json',
+			Authorization: token ? `Bearer ${token}` : '',
 		}
 
 		const headers = {

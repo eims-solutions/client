@@ -10,6 +10,14 @@ import {
 } from '@/components/ui/dropdown-menu'
 
 export default function UserNav() {
+	// const { logout } = useLogout()
+
+	const handleOnClickLogout = () => {
+		// Implement logout logic here
+		console.log('Logout')
+		// logout()
+	}
+
 	return (
 		<div className='flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4'>
 			<form className='ml-auto flex-1 sm:flex-initial'>
@@ -35,7 +43,9 @@ export default function UserNav() {
 					<DropdownMenuItem>Settings</DropdownMenuItem>
 					<DropdownMenuItem>Support</DropdownMenuItem>
 					<DropdownMenuSeparator />
-					<DropdownMenuItem>Logout</DropdownMenuItem>
+					<DropdownMenuItem onClick={handleOnClickLogout}>
+						Logout
+					</DropdownMenuItem>
 				</DropdownMenuContent>
 			</DropdownMenu>
 		</div>

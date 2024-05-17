@@ -1,13 +1,22 @@
 import { NavBar } from '@/components/layouts/NavBar'
-import { createFileRoute, Outlet } from '@tanstack/react-router'
+import { useAuthStore } from '@/stores/useAuthStore'
+import { createFileRoute, Outlet, useNavigate } from '@tanstack/react-router'
+import { useEffect } from 'react'
 
 export const Route = createFileRoute('/_authenticated')({
 	component: Authenticated,
+	beforeLoad: () => {},
 })
 
 function Authenticated() {
-	// TODO: Implement the authenticated layout logic
-	// If not authenticated, redirect to login
+	const navigate = useNavigate()
+	const token = useAuthStore(state => state.token)
+
+	useEffect(() => {
+		if (!token) {
+			navigate({ to: '/login' })
+		}
+	}, [navigate, token])
 
 	return (
 		<div className='flex min-h-screen w-full flex-col'>

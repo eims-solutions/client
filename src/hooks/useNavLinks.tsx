@@ -19,6 +19,11 @@ export function useNavLinks(className: string) {
 				href: '/teams',
 				className,
 			},
+			{
+				title: 'Individuals',
+				href: '/admin/individuals',
+				className,
+			},
 		],
 		[className]
 	)
