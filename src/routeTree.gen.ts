@@ -18,6 +18,7 @@ import { Route as IndexImport } from './routes/index'
 import { Route as AuthenticatedTeamsImport } from './routes/_authenticated/teams'
 import { Route as AuthenticatedEventsImport } from './routes/_authenticated/events'
 import { Route as AuthenticatedDashboardImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedAdminIndividualsImport } from './routes/_authenticated/admin/individuals'
 
 // Create/Update Routes
 
@@ -56,6 +57,12 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardImport.update({
   getParentRoute: () => AuthenticatedRoute,
 } as any)
 
+const AuthenticatedAdminIndividualsRoute =
+  AuthenticatedAdminIndividualsImport.update({
+    path: '/admin/individuals',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -88,6 +95,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedTeamsImport
       parentRoute: typeof AuthenticatedImport
     }
+    '/_authenticated/admin/individuals': {
+      preLoaderRoute: typeof AuthenticatedAdminIndividualsImport
+      parentRoute: typeof AuthenticatedImport
+    }
   }
 }
 
@@ -99,6 +110,7 @@ export const routeTree = rootRoute.addChildren([
     AuthenticatedDashboardRoute,
     AuthenticatedEventsRoute,
     AuthenticatedTeamsRoute,
+    AuthenticatedAdminIndividualsRoute,
   ]),
   HomeRoute,
   LoginRoute,

@@ -6,9 +6,21 @@ import {
 	CardHeader,
 	CardTitle,
 } from '@/components/ui/card'
+import { useAuthStore } from '@/stores/useAuthStore'
 import { cn } from '@/utils/cn'
+import { useNavigate } from '@tanstack/react-router'
+import { useEffect } from 'react'
 
 export function Login() {
+	const navigate = useNavigate()
+	const token = useAuthStore(state => state.token)
+
+	useEffect(() => {
+		if (token) {
+			navigate({ to: '/dashboard' })
+		}
+	}, [navigate, token])
+
 	return (
 		<div className={cn('container flex justify-center items-center h-screen')}>
 			<Card className={cn('mx-auto max-w-sm')}>

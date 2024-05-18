@@ -29,13 +29,6 @@ export function LoginForm() {
 
 	const { onLoginSubmit, isPending, isError, isSuccess } = useLoginCredentials()
 
-	// TODO: Implement navigation
-	// useEffect(() => {
-	// 	if (isSuccess) {
-	// 		navigate({ to: '/user-management' })
-	// 	}
-	// }, [isSuccess, navigate])
-
 	useEffect(() => {
 		if (isSuccess) {
 			console.log('Login success')
