@@ -15,6 +15,7 @@ import { Route as LoginImport } from './routes/login'
 import { Route as HomeImport } from './routes/home'
 import { Route as AuthenticatedImport } from './routes/_authenticated'
 import { Route as IndexImport } from './routes/index'
+import { Route as AuthenticatedUsersImport } from './routes/_authenticated/users'
 import { Route as AuthenticatedTeamsImport } from './routes/_authenticated/teams'
 import { Route as AuthenticatedEventsImport } from './routes/_authenticated/events'
 import { Route as AuthenticatedDashboardImport } from './routes/_authenticated/dashboard'
@@ -40,6 +41,11 @@ const AuthenticatedRoute = AuthenticatedImport.update({
 const IndexRoute = IndexImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
+} as any)
+
+const AuthenticatedUsersRoute = AuthenticatedUsersImport.update({
+  path: '/users',
+  getParentRoute: () => AuthenticatedRoute,
 } as any)
 
 const AuthenticatedTeamsRoute = AuthenticatedTeamsImport.update({
@@ -95,6 +101,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedTeamsImport
       parentRoute: typeof AuthenticatedImport
     }
+    '/_authenticated/users': {
+      preLoaderRoute: typeof AuthenticatedUsersImport
+      parentRoute: typeof AuthenticatedImport
+    }
     '/_authenticated/admin/individuals': {
       preLoaderRoute: typeof AuthenticatedAdminIndividualsImport
       parentRoute: typeof AuthenticatedImport
@@ -110,6 +120,7 @@ export const routeTree = rootRoute.addChildren([
     AuthenticatedDashboardRoute,
     AuthenticatedEventsRoute,
     AuthenticatedTeamsRoute,
+    AuthenticatedUsersRoute,
     AuthenticatedAdminIndividualsRoute,
   ]),
   HomeRoute,

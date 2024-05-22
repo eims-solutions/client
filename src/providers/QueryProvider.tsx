@@ -1,9 +1,17 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { useHandleErrorResponse } from '@/hooks/useHandleErrorResponse'
+import {
+	QueryCache,
+	QueryClient,
+	QueryClientProvider,
+} from '@tanstack/react-query'
+import { AxiosResponse } from 'axios'
 import { PropsWithChildren, useState } from 'react'
 
 type QueryProviderProps = PropsWithChildren
 
 export function QueryProvider({ children }: QueryProviderProps) {
+	const handleErrorResponse = useHandleErrorResponse()
+
 	const [queryClient] = useState(
 		() =>
 			new QueryClient({
@@ -14,7 +22,13 @@ export function QueryProvider({ children }: QueryProviderProps) {
 						retry: false,
 					},
 				},
-				// queryCache: new QueryCache({}),
+				queryCache: new QueryCache({
+					onError: (error: Error) => {
+						const err = error as unknown as AxiosResponse
+
+						handleErrorResponse(err)
+					},
+				}),
 			})
 	)
 

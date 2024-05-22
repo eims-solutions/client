@@ -10,6 +10,11 @@ export function useNavLinks(className: string) {
 				className,
 			},
 			{
+				title: 'Users',
+				href: '/users',
+				className,
+			},
+			{
 				title: 'Events',
 				href: '/events',
 				className,
