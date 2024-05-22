@@ -4,11 +4,9 @@ import {
 	getCoreRowModel,
 	useReactTable,
 } from '@tanstack/react-table'
-// import { ScrollArea, ScrollBar } from './scroll-area'
 import { cn } from '@/utils/cn'
-import { ChevronLeftIcon, ChevronRightIcon, Loader2 } from 'lucide-react'
+import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
 import { Button } from './button'
-import { ScrollArea, ScrollBar } from './scroll-area'
 import {
 	Table,
 	TableBody,
@@ -47,19 +45,45 @@ export function DataTable<TData, TValue>({
 		getCoreRowModel: getCoreRowModel(),
 	})
 
+	const renderTableBody = () => {
+		if (isLoading) {
+			return (
+				<TableRow>
+					<TableCell colSpan={columns.length} className='h-24 text-center'>
+						Loading...
+					</TableCell>
+				</TableRow>
+			)
+		}
+
+		if (table.getRowModel().rows?.length) {
+			return table.getRowModel().rows.map(row => (
+				<TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
+					{row.getVisibleCells().map(cell => (
+						<TableCell key={cell.id}>
+							{flexRender(cell.column.columnDef.cell, cell.getContext())}
+						</TableCell>
+					))}
+				</TableRow>
+			))
+		}
+
+		return (
+			<TableRow>
+				<TableCell colSpan={columns.length} className={cn('h-24 text-center')}>
+					No results.
+				</TableCell>
+			</TableRow>
+		)
+	}
+
 	return (
 		<>
-			{/* <ScrollArea className='rounded-md border h-[calc(80vh-220px)]'> */}
-			{isLoading ? (
-				<div className={cn('flex items-center justify-center h-64')}>
-					<Loader2 className={cn('h-10 w-10 animate-spin')} />
-				</div>
-			) : (
-				<div className={cn('rounded border')}>
-					<ScrollArea
-						className={cn('overflow-y-scroll max-h-[calc(80vh-220px)]')}>
-						<Table className={cn('relative')}>
-							<TableHeader>
+			<div className='w-full'>
+				<div className='rounded border'>
+					<div className='max-h-[calc(90vh-220px)] relative overflow-auto'>
+						<Table>
+							<TableHeader className='sticky top-0 bg-secondary'>
 								{table.getHeaderGroups().map(headerGroup => (
 									<TableRow key={headerGroup.id}>
 										{headerGroup.headers.map(header => {
@@ -77,39 +101,11 @@ export function DataTable<TData, TValue>({
 									</TableRow>
 								))}
 							</TableHeader>
-							<TableBody>
-								{table.getRowModel().rows?.length ? (
-									table.getRowModel().rows.map(row => (
-										<TableRow
-											key={row.id}
-											data-state={row.getIsSelected() && 'selected'}>
-											{row.getVisibleCells().map(cell => (
-												<TableCell key={cell.id}>
-													{flexRender(
-														cell.column.columnDef.cell,
-														cell.getContext()
-													)}
-												</TableCell>
-											))}
-										</TableRow>
-									))
-								) : (
-									<TableRow>
-										<TableCell
-											colSpan={columns.length}
-											className={cn('h-24 text-center')}>
-											No results.
-										</TableCell>
-									</TableRow>
-								)}
-							</TableBody>
+							<TableBody>{renderTableBody()}</TableBody>
 						</Table>
-						<ScrollBar orientation='horizontal' />
-					</ScrollArea>
+					</div>
 				</div>
-			)}
-			{/* <ScrollBar orientation='horizontal' />
-			</ScrollArea> */}
+			</div>
 			<div
 				className={cn(
 					'flex flex-col gap-2 sm:flex-row items-center justify-end space-x-2 py-4'
