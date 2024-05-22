@@ -17,6 +17,6 @@ export function useFetchEvents() {
 				},
 			}),
 		staleTime: 1000 * 5,
-		// refetchInterval: 1000 * 5,
+		refetchInterval: 1000 * 5,
 	})
 }

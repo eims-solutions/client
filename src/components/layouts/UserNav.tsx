@@ -8,14 +8,13 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuItem,
 } from '@/components/ui/dropdown-menu'
+import { useLogout } from '@/hooks/useLogout'
 
 export default function UserNav() {
-	// const { logout } = useLogout()
+	const { onLogout } = useLogout()
 
 	const handleOnClickLogout = () => {
-		// Implement logout logic here
-		console.log('Logout')
-		// logout()
+		onLogout()
 	}
 
 	return (
