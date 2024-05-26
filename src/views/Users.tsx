@@ -10,9 +10,11 @@ export function Users() {
 		useFetchUsers()
 	const users = useUserStore(state => state.users)
 	const page = useUserStore(state => state.page)
+	const perPage = useUserStore(state => state.perPage)
 	const totalPages = useUserStore(state => state.totalPages)
 	const setUsers = useUserStore(state => state.setUsers)
 	const setPage = useUserStore(state => state.setPage)
+	const setPerPage = useUserStore(state => state.setPerPage)
 	const setTotalPages = useUserStore(state => state.setTotalPages)
 	const columns = useUserTableColumns()
 
@@ -21,12 +23,14 @@ export function Users() {
 	useEffect(() => {
 		if (isSuccess) {
 			setUsers(data.data)
+			setPerPage(data.meta.per_page)
 			setTotalPages(data.meta.last_page)
 		}
-	}, [data, isSuccess, setTotalPages, setUsers])
+	}, [data, isSuccess, setPerPage, setTotalPages, setUsers])
 
 	const onPaginationChange = (e: PaginationConfig) => {
 		setPage(e.current)
+		setPerPage(e.perPage ?? 0)
 	}
 
 	return (
@@ -38,7 +42,13 @@ export function Users() {
 				columns={columns}
 				data={users}
 				isLoading={loading}
-				pagination={{ current: page, pageSize: totalPages }}
+				pagination={{
+					totalPages,
+					perPage,
+					current: page,
+					showPageSizeOptions: true,
+				}}
+				pageSizeOptions={[10, 20, 50, 100]}
 				onPaginationChange={onPaginationChange}
 			/>
 		</>
