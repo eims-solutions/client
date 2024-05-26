@@ -11,6 +11,7 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as MultiSelectSampleImport } from './routes/multi-select-sample'
 import { Route as LoginImport } from './routes/login'
 import { Route as HomeImport } from './routes/home'
 import { Route as AuthenticatedImport } from './routes/_authenticated'
@@ -22,6 +23,11 @@ import { Route as AuthenticatedDashboardImport } from './routes/_authenticated/d
 import { Route as AuthenticatedAdminIndividualsImport } from './routes/_authenticated/admin/individuals'
 
 // Create/Update Routes
+
+const MultiSelectSampleRoute = MultiSelectSampleImport.update({
+  path: '/multi-select-sample',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const LoginRoute = LoginImport.update({
   path: '/login',
@@ -89,6 +95,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginImport
       parentRoute: typeof rootRoute
     }
+    '/multi-select-sample': {
+      preLoaderRoute: typeof MultiSelectSampleImport
+      parentRoute: typeof rootRoute
+    }
     '/_authenticated/dashboard': {
       preLoaderRoute: typeof AuthenticatedDashboardImport
       parentRoute: typeof AuthenticatedImport
@@ -125,6 +135,7 @@ export const routeTree = rootRoute.addChildren([
   ]),
   HomeRoute,
   LoginRoute,
+  MultiSelectSampleRoute,
 ])
 
 /* prettier-ignore-end */
