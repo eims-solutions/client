@@ -15,9 +15,18 @@ import {
 	TableRow,
 } from '@/components/ui/table'
 
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
+
+
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { Activity, CreditCard, DollarSign, Users } from 'lucide-react'
+// import { Activity, CreditCard,  Users } from 'lucide-react'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 
 export function Dashboard() {
@@ -27,67 +36,177 @@ export function Dashboard() {
 				<h1 className='text-3xl font-semibold'>CeSA Days {`{Year}`}</h1>
 			</header>
 			<main className='flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8'>
-				<div className='grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4'>
-					<Card x-chunk='dashboard-01-chunk-0'>
-						<CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-							<CardTitle className='text-sm font-medium'>
-								Total Revenue
-							</CardTitle>
-							<DollarSign className='h-4 w-4 text-muted-foreground' />
-						</CardHeader>
-						<CardContent>
-							<div className='text-2xl font-bold'>$45,231.89</div>
-							<p className='text-xs text-muted-foreground'>
-								+20.1% from last month
-							</p>
-						</CardContent>
-					</Card>
-					<Card x-chunk='dashboard-01-chunk-1'>
-						<CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-							<CardTitle className='text-sm font-medium'>
-								Subscriptions
-							</CardTitle>
-							<Users className='h-4 w-4 text-muted-foreground' />
-						</CardHeader>
-						<CardContent>
-							<div className='text-2xl font-bold'>+2350</div>
-							<p className='text-xs text-muted-foreground'>
-								+180.1% from last month
-							</p>
-						</CardContent>
-					</Card>
-					<Card x-chunk='dashboard-01-chunk-2'>
-						<CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-							<CardTitle className='text-sm font-medium'>Sales</CardTitle>
-							<CreditCard className='h-4 w-4 text-muted-foreground' />
-						</CardHeader>
-						<CardContent>
-							<div className='text-2xl font-bold'>+12,234</div>
-							<p className='text-xs text-muted-foreground'>
-								+19% from last month
-							</p>
-						</CardContent>
-					</Card>
-					<Card x-chunk='dashboard-01-chunk-3'>
-						<CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-							<CardTitle className='text-sm font-medium'>
-								Team {`{Team Name}`}
-							</CardTitle>
-							<Activity className='h-4 w-4 text-muted-foreground' />
-						</CardHeader>
-						<CardContent>
-							<div className='text-2xl font-bold'>+573</div>
-							<p className='text-xs text-muted-foreground'>
-								Current Top Points Earner
-							</p>
-						</CardContent>
-					</Card>
+				<div className='grid '>
+					<Carousel>
+						<CarouselContent>
+							<CarouselItem className="md:basis-1/4 lg:basis-1/6">
+								<Card x-chunk='dashboard-01-chunk-0'>
+									<CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2 fas fa-basketball-ball'>
+										<CardTitle className='text-sm font-medium'>
+											Basketball
+										</CardTitle>
+									</CardHeader>
+									<CardContent>
+										<div className='text-2xl font-bold'>TEAM vs. TEAM</div>
+										<p className='text-lg text-muted-foreground'>
+											Gymnasium @ 15:00
+										</p>
+									</CardContent>
+								</Card>
+							</CarouselItem>
+							
+							<CarouselItem className="md:basis-1/4 lg:basis-1/6">
+								<Card x-chunk='dashboard-01-chunk-1'>
+									<CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
+										<CardTitle className='text-sm font-medium'>
+											Volleyball
+										</CardTitle>
+									</CardHeader>
+									<CardContent>
+										<div className='text-2xl font-bold'>TEAM vs. TEAM</div>
+										<p className='text-lg text-muted-foreground'>
+											Gymnasium @ 15:00
+										</p>
+									</CardContent>
+								</Card>
+							</CarouselItem>
+
+							<CarouselItem className="md:basis-1/4 lg:basis-1/6">
+								<Card x-chunk='dashboard-01-chunk-2'>
+									<CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
+										<CardTitle className='text-sm font-medium'>Baseball</CardTitle>
+									</CardHeader>
+									<CardContent>
+										<div className='text-2xl font-bold'>TEAM vs. TEAM</div>
+										<p className='text-lg text-muted-foreground'>
+											Gymnasium @ 15:00
+										</p>
+									</CardContent>
+								</Card>
+							</CarouselItem>
+							
+							<CarouselItem className="md:basis-1/4 lg:basis-1/6">
+								<Card x-chunk='dashboard-01-chunk-3'>
+									<CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
+										<CardTitle className='text-sm font-medium'>
+											Badminton
+										</CardTitle>
+									</CardHeader>
+									<CardContent>
+										<div className='text-2xl font-bold'>TEAM vs. TEAM</div>
+										<p className='text-lg text-muted-foreground'>
+											Gymnasium @ 15:00
+										</p>
+									</CardContent>
+								</Card>
+							</CarouselItem>
+							
+							<CarouselItem className="md:basis-1/4 lg:basis-1/6">
+								<Card x-chunk='dashboard-01-chunk-3'>
+									<CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
+										<CardTitle className='text-sm font-medium'>
+											Soccer
+										</CardTitle>
+									</CardHeader>
+									<CardContent>
+										<div className='text-2xl font-bold'>TEAM vs. TEAM</div>
+										<p className='text-lg text-muted-foreground'>
+											Gymnasium @ 15:00
+										</p>
+									</CardContent>
+								</Card>
+							</CarouselItem>
+							
+							<CarouselItem className="md:basis-1/4 lg:basis-1/6">
+								<Card x-chunk='dashboard-01-chunk-3'>
+									<CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
+										<CardTitle className='text-sm font-medium'>
+											Track and Field
+										</CardTitle>
+									</CardHeader>
+									<CardContent>
+										<div className='text-2xl font-bold'>TEAM vs. TEAM</div>
+										<p className='text-lg text-muted-foreground'>
+											Gymnasium @ 15:00
+										</p>
+									</CardContent>
+								</Card>
+							</CarouselItem>
+							
+							<CarouselItem className="md:basis-1/4 lg:basis-1/6">
+								<Card x-chunk='dashboard-01-chunk-3'>
+									<CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
+										<CardTitle className='text-sm font-medium'>
+											Table Tennis
+										</CardTitle>
+									</CardHeader>
+									<CardContent>
+										<div className='text-2xl font-bold'>TEAM vs. TEAM</div>
+										<p className='text-lg text-muted-foreground'>
+											Gymnasium @ 15:00
+										</p>
+									</CardContent>
+								</Card>
+							</CarouselItem>
+							
+							<CarouselItem className="md:basis-1/4 lg:basis-1/6">
+								<Card x-chunk='dashboard-01-chunk-3'>
+									<CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
+										<CardTitle className='text-sm font-medium'>
+											Chess
+										</CardTitle>
+									</CardHeader>
+									<CardContent>
+										<div className='text-2xl font-bold'>TEAM vs. TEAM</div>
+										<p className='text-lg text-muted-foreground'>
+											Gymnasium @ 15:00
+										</p>
+									</CardContent>
+								</Card>
+							</CarouselItem>
+							
+							<CarouselItem className="md:basis-1/4 lg:basis-1/6">
+								<Card x-chunk='dashboard-01-chunk-3'>
+									<CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
+										<CardTitle className='text-sm font-medium'>
+											Music
+										</CardTitle>
+									</CardHeader>
+									<CardContent>
+										<div className='text-2xl font-bold'>TEAM vs. TEAM</div>
+										<p className='text-lg text-muted-foreground'>
+											Gymnasium @ 15:00
+										</p>
+									</CardContent>
+								</Card>
+							</CarouselItem>
+							
+							<CarouselItem className="md:basis-1/4 lg:basis-1/6">
+								<Card x-chunk='dashboard-01-chunk-3'>
+									<CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
+										<CardTitle className='text-sm font-medium'>
+											Music
+										</CardTitle>
+									</CardHeader>
+									<CardContent>
+										<div className='text-2xl font-bold'>TEAM vs. TEAM</div>
+										<p className='text-lg text-muted-foreground'>
+											Gymnasium @ 15:00
+										</p>
+									</CardContent>
+								</Card>
+							</CarouselItem>
+						</CarouselContent>						
+							<CarouselPrevious />
+							<CarouselNext />
+					</Carousel>
+
 				</div>
 				<div className='grid gap-4 md:gap-8 lg:grid-cols-2 xl:grid-cols-3'>
 					<Card className='xl:col-span-2' x-chunk='dashboard-01-chunk-4'>
 						<CardHeader className='flex flex-row items-center'>
 							<div className='grid gap-2'>
-								<CardTitle>Transactions</CardTitle>
+								<CardTitle>Recently Ended Events</CardTitle>
 								<CardDescription>
 									Recent transactions from your store.
 								</CardDescription>
@@ -113,7 +232,7 @@ export function Dashboard() {
 										<TableHead className='hidden xl:table-column'>
 											Date
 										</TableHead>
-										<TableHead className='text-right'>Amount</TableHead>
+										<TableHead className='text-right'>Winner</TableHead>
 									</TableRow>
 								</TableHeader>
 								<TableBody>
@@ -223,83 +342,88 @@ export function Dashboard() {
 					</Card>
 					<Card x-chunk='dashboard-01-chunk-5'>
 						<CardHeader>
-							<CardTitle>Recent Sales</CardTitle>
+							<CardTitle>Team Ranking</CardTitle>
 						</CardHeader>
 						<CardContent className='grid gap-8'>
 							<div className='flex items-center gap-4'>
 								<Avatar className='hidden h-9 w-9 sm:flex'>
 									<AvatarImage src='/avatars/01.png' alt='Avatar' />
-									<AvatarFallback>OM</AvatarFallback>
+									<AvatarFallback>T</AvatarFallback>
 								</Avatar>
 								<div className='grid gap-1'>
 									<p className='text-sm font-medium leading-none'>
-										Olivia Martin
-									</p>
-									<p className='text-sm text-muted-foreground'>
-										olivia.martin@email.com
+										Targaryen
 									</p>
 								</div>
-								<div className='ml-auto font-medium'>+$1,999.00</div>
+								<div className='ml-auto font-medium'>48,985
+									<p className='text-sm text-muted-foreground'>
+										+5,123
+									</p>
+								</div>
 							</div>
 							<div className='flex items-center gap-4'>
 								<Avatar className='hidden h-9 w-9 sm:flex'>
 									<AvatarImage src='/avatars/02.png' alt='Avatar' />
-									<AvatarFallback>JL</AvatarFallback>
+									<AvatarFallback>B</AvatarFallback>
 								</Avatar>
 								<div className='grid gap-1'>
 									<p className='text-sm font-medium leading-none'>
-										Jackson Lee
-									</p>
-									<p className='text-sm text-muted-foreground'>
-										jackson.lee@email.com
+										Baratheon
 									</p>
 								</div>
-								<div className='ml-auto font-medium'>+$39.00</div>
+								<div className='ml-auto font-medium'>45,835
+									<p className='text-sm text-muted-foreground'>
+										+2,003
+									</p>
+								</div>
 							</div>
 							<div className='flex items-center gap-4'>
 								<Avatar className='hidden h-9 w-9 sm:flex'>
 									<AvatarImage src='/avatars/03.png' alt='Avatar' />
-									<AvatarFallback>IN</AvatarFallback>
+									<AvatarFallback>S</AvatarFallback>
 								</Avatar>
 								<div className='grid gap-1'>
 									<p className='text-sm font-medium leading-none'>
-										Isabella Nguyen
-									</p>
-									<p className='text-sm text-muted-foreground'>
-										isabella.nguyen@email.com
+										Stark
 									</p>
 								</div>
-								<div className='ml-auto font-medium'>+$299.00</div>
+								<div className='ml-auto font-medium'>45,305
+									<p className='text-sm text-muted-foreground'>
+										+2,874
+									</p>
+								</div>
 							</div>
 							<div className='flex items-center gap-4'>
 								<Avatar className='hidden h-9 w-9 sm:flex'>
 									<AvatarImage src='/avatars/04.png' alt='Avatar' />
-									<AvatarFallback>WK</AvatarFallback>
+									<AvatarFallback>S</AvatarFallback>
 								</Avatar>
 								<div className='grid gap-1'>
 									<p className='text-sm font-medium leading-none'>
-										William Kim
-									</p>
-									<p className='text-sm text-muted-foreground'>
-										will@email.com
+										Snow
 									</p>
 								</div>
-								<div className='ml-auto font-medium'>+$99.00</div>
+								<div className='ml-auto font-medium'>38,633
+									<p className='text-sm text-muted-foreground'>
+										+2,564
+									</p>
+								</div>
 							</div>
 							<div className='flex items-center gap-4'>
 								<Avatar className='hidden h-9 w-9 sm:flex'>
 									<AvatarImage src='/avatars/05.png' alt='Avatar' />
-									<AvatarFallback>SD</AvatarFallback>
+									<AvatarFallback>L</AvatarFallback>
 								</Avatar>
 								<div className='grid gap-1'>
 									<p className='text-sm font-medium leading-none'>
-										Sofia Davis
-									</p>
-									<p className='text-sm text-muted-foreground'>
-										sofia.davis@email.com
+										Lannister
 									</p>
 								</div>
-								<div className='ml-auto font-medium'>+$39.00</div>
+								<div className='ml-auto font-medium'>38,537
+									<p className='text-sm text-muted-foreground'>
+										+2,471
+									</p>
+								</div>
 							</div>
 						</CardContent>
 					</Card>
