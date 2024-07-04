@@ -1,9 +1,10 @@
-import { Button } from '@/components/ui/button'
 import { DataTable, PaginationConfig } from '@/components/ui/data-table'
 import { useFetchUsers } from '@/hooks/useFetchUsers'
 import { useUserTableColumns } from '@/hooks/useUserTableColumns'
 import { useUserStore } from '@/stores/useUserStore'
 import { useEffect } from 'react'
+
+import { AddUserDialog } from './AddUserDialog'
 
 export function Users() {
 	const { data, isLoading, isRefetching, isFetching, isSuccess } =
@@ -35,8 +36,8 @@ export function Users() {
 
 	return (
 		<>
-			<div className='flex justify-end'>
-				<Button>Add Users</Button>
+			<div className='flex justify-end'>			
+				<AddUserDialog/>
 			</div>
 			<DataTable
 				columns={columns}
